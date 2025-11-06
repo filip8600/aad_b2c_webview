@@ -28,12 +28,12 @@ class B2CAuthDatasourceImpl implements B2CAuthDatasource {
 
     final url = Uri.parse('$tenantBaseUrl/$userFlowName/$urlEnding').toString();
 
+    final scope = providedScopes == null ? Constants.defaultScopes : params.providedScopes;
     final Map<String, dynamic> body = {
       'grant_type': Constants.refreshToken,
-      'scope': Constants.defaultScopes,
       'client_id': params.clientId,
       'refresh_token': params.refreshToken,
-      'scope': params.providedScopes,
+      'scope': scope,
     };
 
     final response = await _client.post(
